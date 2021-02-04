@@ -1,7 +1,10 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import Link from 'next/link'
+import { useAuthentication } from '../hooks/authentication'
 
 export default function Home() {
+  const { user } = useAuthentication()
   return (
     <div className={styles.container}>
       <Head>
@@ -10,6 +13,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
+        <p>{user?.uid || '未ログイン'}</p>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
@@ -60,6 +64,10 @@ export default function Home() {
           <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>
+
+      <Link href="/page2">
+        <a>Go to page2</a>
+      </Link>
     </div>
   )
 }
